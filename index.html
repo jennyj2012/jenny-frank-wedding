@@ -10,14 +10,14 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    background: #f7f3ee;
+    background: #fafaf8 url('flowers.webp') no-repeat center center;
+    background-size: 100% 100%;
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
-    padding-bottom: 3vh;
   }
 
   .scene {
@@ -26,6 +26,7 @@
     max-width: 620px;
     margin: 0 auto;
     padding: 20px;
+    padding-top: 140px;
     position: relative;
   }
 
@@ -232,10 +233,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    background-image: url('flowers.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: transparent;
   }
 
   .card-content {
@@ -551,8 +549,12 @@
 
   /* ── Responsive ── */
   @media (max-width: 640px) {
-    .scene { padding: 10px; padding-top: 52vh; }
-    .envelope-wrapper.lowered { transform: translateY(10vh); }
+    body {
+      background-size: auto 100%;
+      background-position: center center;
+    }
+    .scene { padding: 10px; padding-top: 140px; }
+    .envelope-wrapper.lowered { transform: translateY(10%); }
     .card-container {
       left: -4%;
       right: -4%;
@@ -566,7 +568,8 @@
     .card-content .guest-names { font-size: 17px; }
     .event-details { grid-template-columns: 1fr; gap: 16px; }
     .detail-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #c4a87a, transparent); justify-self: center; }
-    .invitation-card { padding: 32px 20px; }
+    .invitation-panel { margin-top: 100px !important; }
+    .invitation-card { padding: 32px 20px; margin-top: 10px; }
     .wax-seal { width: 50px; height: 50px; }
     .wax-seal::before { font-size: 12px; }
   }
