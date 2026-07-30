@@ -10,14 +10,14 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    background: #fafaf8 url('flowers.webp') no-repeat center center;
-    background-size: 100% 100%;
+    background: #f7f3ee;
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
+    padding-bottom: 3vh;
   }
 
   .scene {
@@ -26,10 +26,7 @@
     max-width: 620px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 140px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    position: relative;
   }
 
   /* ── Envelope ── */
@@ -38,6 +35,12 @@
     width: 100%;
     aspect-ratio: 1.5 / 1;
     cursor: pointer;
+    transform: translateY(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .envelope-wrapper.lowered {
+    transform: translateY(18vh);
   }
 
   .envelope-wrapper.opened {
@@ -187,8 +190,8 @@
   /* ── Card — hidden behind liner, pops to front on open ── */
   .card-container {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: -8%;
+    right: -8%;
     top: -140%;
     height: 140%;
     z-index: 20;
@@ -229,7 +232,9 @@
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    background: transparent;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" preserveAspectRatio="none"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="%23fffdf8"/><stop offset="1" stop-color="%23fef9f0"/></linearGradient></defs><rect width="600" height="800" fill="url(%23bg)"/><g opacity="0.15"><path d="M 80,60 L 73,42 L 67,44 L 70,38 L 65,37 L 71,32 L 69,27 L 75,30 L 78,25 L 80,30 L 86,27 L 84,32 L 90,37 L 85,38 L 88,44 L 82,42 Z" fill="%23d4a574"/><circle cx="80" cy="42" r="7" fill="%23e8c8a0"/><circle cx="80" cy="42" r="3" fill="%23c49560"/><path d="M 520,80 L 513,62 L 507,64 L 510,58 L 505,57 L 511,52 L 509,47 L 515,50 L 518,45 L 520,50 L 526,47 L 524,52 L 530,57 L 525,58 L 528,64 L 522,62 Z" fill="%23c49aba"/><circle cx="520" cy="62" r="7" fill="%23d4b8d0"/><circle cx="520" cy="62" r="3" fill="%23b088a8"/><path d="M 100,700 L 93,682 L 87,684 L 90,678 L 85,677 L 91,672 L 89,667 L 95,670 L 98,665 L 100,670 L 106,667 L 104,672 L 110,677 L 105,678 L 108,684 L 102,682 Z" fill="%23d4a574"/><circle cx="100" cy="682" r="7" fill="%23e8c8a0"/><ellipse cx="90" cy="695" rx="8" ry="15" fill="%23b8a07a" transform="rotate(-20 90 695)"/><path d="M 500,720 L 495,705 L 490,707 L 492,702 L 488,701 L 492,697 L 490,693 L 495,695 L 497,691 L 500,695 L 505,693 L 503,697 L 507,701 L 503,702 L 505,707 L 500,705 Z" fill="%23c49aba"/><circle cx="500" cy="705" r="6" fill="%23d4b8d0"/><ellipse cx="508" cy="718" rx="7" ry="13" fill="%23b8a0c0" transform="rotate(25 508 718)"/><path d="M 50,400 Q 52,440 55,470" stroke="%23b8a07a" stroke-width="2" fill="none" opacity="0.3"/><ellipse cx="48" cy="410" rx="6" ry="3" fill="%23c4b896" opacity="0.4" transform="rotate(20 48 410)"/><ellipse cx="52" cy="430" rx="7" ry="4" fill="%23c4b896" opacity="0.4" transform="rotate(-10 52 430)"/><path d="M 550,350 Q 548,390 545,420" stroke="%23b8a0c0" stroke-width="2" fill="none" opacity="0.3"/><ellipse cx="552" cy="360" rx="6" ry="3" fill="%23d4b8d0" opacity="0.4" transform="rotate(-20 552 360)"/><ellipse cx="548" cy="380" rx="7" ry="4" fill="%23d4b8d0" opacity="0.4" transform="rotate(15 548 380)"/></g></svg>');
+    background-size: cover;
+    background-position: center;
   }
 
   .card-content {
@@ -356,7 +361,7 @@
     border-radius: 4px;
     box-shadow: 0 4px 24px rgba(100, 80, 50, 0.1);
     padding: 48px 36px;
-    margin-top: 190px;
+    margin-top: 20px;
     position: relative;
     overflow: hidden;
   }
@@ -544,13 +549,12 @@
   }
 
   /* ── Responsive ── */
-  @media (max-width: 480px) {
-    body {
-      background-size: auto 100%;
-      background-position: center center;
-    }
-    .scene { padding: 10px; padding-top: 140px; gap: 220px; }
+  @media (max-width: 640px) {
+    .scene { padding: 10px; padding-top: 52vh; }
+    .envelope-wrapper.lowered { transform: translateY(10vh); }
     .card-container {
+      left: -4%;
+      right: -4%;
       height: 150%;
     }
     .card { padding: 30% 8% 22% 8%; }
@@ -561,7 +565,7 @@
     .card-content .guest-names { font-size: 17px; }
     .event-details { grid-template-columns: 1fr; gap: 16px; }
     .detail-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #c4a87a, transparent); justify-self: center; }
-    .invitation-card { padding: 32px 20px; margin-top: 10px; }
+    .invitation-card { padding: 32px 20px; }
     .wax-seal { width: 50px; height: 50px; }
     .wax-seal::before { font-size: 12px; }
   }
@@ -595,9 +599,9 @@
             <p class="guest-names" style="margin-bottom: 4px;">Dear <span class="guest-name">Guest1</span></p>
             <div class="divider"></div>
             <h1 class="names">
-              MS. JENNY JUAREZ
+              JENNY JUAREZ
               <span class="ampersand">&</span>
-              MR. FRANK CADMAN
+              FRANK CADMAN
             </h1>
             <div class="divider"></div>
             <p class="details">
@@ -670,7 +674,7 @@
     <!-- RSVP Card -->
     <div class="invitation-card" style="margin-top: 20px;">
       <h2 class="section-title">RSVP</h2>
-      <p class="section-subtitle">Kindly respond by September 1, 2026</p>
+      <p class="section-subtitle">Kindly respond by September 15, 2026</p>
 
       <p style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: #6b5a3e; text-align: center; letter-spacing: 2px; margin-bottom: 8px;">
         <span class="guest-name">Guest1</span>
@@ -679,20 +683,13 @@
         Please let us know if you'll be joining us<br>by visiting our wedding website.
       </p>
 
-      <a href="https://www.theknot.com/us/jenny-juarez-and-frank-cadman-2026-11-07-dbf0b8a1-51c7-4cf0-93a8-c4e1e3361353/rsvp"
+      <a href="https://www.theknot.com/us/jenny-juarez-and-frank-cadman-2026-11-07-dbf0b8a1-51c7-4cf0-93a8-c4e1e3361353"
          target="_blank"
          rel="noopener noreferrer"
          class="submit-btn"
          style="display: block; text-align: center; text-decoration: none;">
         RSVP
       </a>
-
-      <p style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #a08c6e; text-align: center; margin-top: 20px;">
-        Visit our <a href="https://www.theknot.com/us/jenny-juarez-and-frank-cadman-2026-11-07-dbf0b8a1-51c7-4cf0-93a8-c4e1e3361353"
-           target="_blank"
-           rel="noopener noreferrer"
-           style="color: #6b5a3e; text-decoration: underline;">website</a>
-      </p>
 
       <p style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #a08c6e; text-align: center; margin-top: 20px;">
         Can't find your invite? Send us your
@@ -718,6 +715,8 @@
 
     const envelope = document.getElementById('envelope');
 
+    envelope.classList.add('lowered');
+
     setTimeout(() => {
       envelope.classList.add('opened');
       spawnPetals();
@@ -725,6 +724,11 @@
 
     setTimeout(() => {
       const panel = document.getElementById('invitationPanel');
+      const card = envelope.querySelector('.card-container');
+      const envelopeRect = envelope.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const gap = cardRect.bottom - envelopeRect.bottom + 180;
+      panel.style.marginTop = Math.max(gap, 0) + 'px';
       panel.classList.add('visible');
     }, 3800);
   }
