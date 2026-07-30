@@ -18,6 +18,20 @@
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
     padding-bottom: 3vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('flowers.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
   }
 
   .scene {
@@ -27,6 +41,7 @@
     margin: 0 auto;
     padding: 20px;
     position: relative;
+    z-index: 1;
   }
 
   /* ── Envelope ── */
@@ -224,18 +239,6 @@
 
   .envelope-wrapper.opened .card {
     box-shadow: 0 12px 48px rgba(80, 60, 30, 0.25);
-  }
-
-  /* ── Floral background ── */
-  .floral-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    background-image: url('flowers.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
   }
 
   .card-content {
@@ -594,8 +597,6 @@
       <!-- Card (hidden behind liner until opened) -->
       <div class="card-container">
         <div class="card">
-          <div class="floral-bg"></div>
-
           <div class="card-content">
             <p class="guest-names" style="margin-bottom: 4px;">Dear <span class="guest-name">Guest1</span></p>
             <div class="divider"></div>
