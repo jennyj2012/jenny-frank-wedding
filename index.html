@@ -55,7 +55,7 @@
   }
 
   .envelope-wrapper.lowered {
-    transform: translateY(18%);
+    transform: translateY(0);
   }
 
   .envelope-wrapper.opened {
@@ -348,6 +348,7 @@
     max-width: 620px;
     width: 100%;
     margin: 0 auto;
+    margin-top: 300px;
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -365,9 +366,17 @@
     border-radius: 4px;
     box-shadow: 0 4px 24px rgba(100, 80, 50, 0.1);
     padding: 48px 36px;
-    margin-top: 20px;
+    margin-top: 0;
     position: relative;
     overflow: hidden;
+  }
+
+  .invitation-card:first-child {
+    margin-top: 0;
+  }
+
+  .invitation-card + .invitation-card {
+    margin-top: 20px;
   }
 
   .invitation-card::before {
@@ -554,12 +563,12 @@
 
   /* ── Responsive ── */
   @media (min-width: 641px) and (max-width: 1024px) {
-    .invitation-card { margin-top: 460px; }
+    .invitation-panel { margin-top: 460px; }
   }
 
   @media (max-width: 640px) {
-    .scene { padding: 10px; padding-top: 52%; }
-    .envelope-wrapper.lowered { transform: translateY(10%); }
+    .scene { padding: 10px; }
+    .invitation-panel { margin-top: 250px; }
     .card-container {
       left: -4%;
       right: -4%;
@@ -734,11 +743,6 @@
 
     setTimeout(() => {
       const panel = document.getElementById('invitationPanel');
-      const card = envelope.querySelector('.card-container');
-      const envelopeRect = envelope.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      const gap = cardRect.bottom - envelopeRect.bottom + 180;
-      panel.style.marginTop = Math.max(gap, 0) + 'px';
       panel.classList.add('visible');
     }, 3800);
   }
